@@ -1,0 +1,13 @@
+Linnade põletamine
+
+Programm genereerib kaardipaki ja mängib linnade põletamist kasutaja vastu.
+Programm peaks sisaldama järgmiseid klasse:
+1) Kaart - loob vastava tugevuse ja mastiga isendi
+2) Pakk - meetod, mis koostab 52-st kaardist paki ning segamismeetod
+3) Peaklass - algatab mängu, küsib kasu
+
+Klass Kaart hoiab endas informatsiooni kaardi tugevuse ja masti kohta.
+Klass Pakk hoiab endas 52 kaardi infot.
+Peaklassis algatatakse mängimine ning kasutaja saab valida, kumb kaart läheb allapoole ning kumb pealepoole.
+
+Programmeerime eesti keeles. Kasutame meetodite nimesid kujul uusMeetod ning klasside nimesid kujul UusKlass.
