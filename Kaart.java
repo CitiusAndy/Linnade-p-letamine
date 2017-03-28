@@ -1,9 +1,16 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 //Klass kaart
 //Java harjutuste eeskujul
 
 public class Kaart {
-	String tugevus; //2, 3, 4, ..., Q, K, A
-	char mast; // 4 masti
+	private String tugevus; //2, 3, 4, ..., J, Q, K, A
+	private int tugevusarv; //2,3,4,...,10,11,...,14 -> mälus 0-12
+	private char mast; // 4 masti
+	private static List<String> sobivadTugevused = Arrays.asList("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"); //List tugevustest, et neid hiljem arvuna saada
+
 	
 	public Kaart(String tugevusk, char mastk) {
 		String mastid = "♣♦♠♥";
@@ -17,6 +24,7 @@ public class Kaart {
 		
 		this.tugevus = tugevusk;
 		this.mast = mastk;
+		this.tugevusarv = sobivadTugevused.lastIndexOf(tugevus);
 	}
 	
 	public Kaart(String kombineeritud) {
@@ -46,20 +54,23 @@ public class Kaart {
 		
 		this.tugevus = tugevusk;
 		this.mast = mastk;
+		this.tugevusarv = sobivadTugevused.lastIndexOf(tugevus);
 
 	}
-
+	
 	public char getMast() {
 		return mast;
 	}
 
-	public String getTugevus() {
-		return tugevus;
+	public int getTugevusarv() {
+		return tugevusarv;
 	}
 
 	@Override
 	public String toString() {
 		return tugevus + mast;
 	}
+	
+	
 
 }

@@ -55,6 +55,7 @@ public class Pakk {
 		Collections.shuffle(kaardid);
 	}
 
+	/*
 	//Meetod, mis võtab pealmise kaardi
 	public Kaart võtaKaart(){
 		if(kaardid.size()==0){
@@ -64,7 +65,29 @@ public class Pakk {
 		kaardid.remove(0);
 		return tagastada;
 	}
+	*/
+	
+	//Meetod, mis võtab pealmise kaardi
+	public Kaart votaKaart1(){
+		if(pakk1.size()==0){
+			throw new RuntimeException("Tühi pakk.");
+		}
+		Kaart tagastada=pakk1.get(0);
+		pakk1.remove(0);
+		return tagastada;
+	}
+	
+	//Meetod, mis võtab pealmise kaardi
+	public Kaart votaKaart2(){
+		if(pakk2.size()==0){
+			throw new RuntimeException("Tühi pakk.");
+		}
+		Kaart tagastada=pakk2.get(0);
+		pakk2.remove(0);
+		return tagastada;
+	}
 
+	//Poolitab paki
 	public void poolita(){
 		ArrayList<Kaart> koopia1 = new ArrayList<>();
 		ArrayList<Kaart> koopia2 = new ArrayList<>();
