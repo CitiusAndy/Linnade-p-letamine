@@ -16,8 +16,8 @@ public class Pakk {
 			koopia.add(kaart);
 		}
 
-		for(int i=0; i<koopia.size(); i++){
-			for(int j=0; j<koopia.size(); j++){
+		for(int i = 0; i < koopia.size(); i++){
+			for(int j = 0; j < koopia.size(); j++){
 				if(i!=j && koopia.get(i).toString().equals(koopia.get(j).toString())){
 					throw new RuntimeException("Topeltkaardid.");
 				}
@@ -27,12 +27,12 @@ public class Pakk {
 	}
 
 	//Konstruktor, mis teeb tavalise 52 kaardiga paki
-	public Pakk(){
+	public Pakk() {
 		ArrayList<Kaart> kaardid = new ArrayList<>(); //K♣
 		String[] tugevused = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-		char[] mastid={'♣', '♦', '♠', '♥'};
-		for(String tugevus: tugevused){
-			for(char mast: mastid){
+		char[] mastid = {'♣', '♦', '♠', '♥'};
+		for(String tugevus: tugevused) {
+			for(char mast: mastid) {
 				//System.out.println(tugevus+mast);
 				Kaart k = new Kaart(tugevus, mast);
 				kaardid.add(k);
@@ -51,14 +51,14 @@ public class Pakk {
 	}
 
 	//Segamismeetod
-	public void sega(){
+	public void sega() {
 		Collections.shuffle(kaardid);
 	}
 
 	/*
 	//Meetod, mis võtab pealmise kaardi
-	public Kaart võtaKaart(){
-		if(kaardid.size()==0){
+	public Kaart võtaKaart() {
+		if(kaardid.size()==0) {
 			throw new RuntimeException("Tühi pakk.");
 		}
 		Kaart tagastada=kaardid.get(0);
@@ -68,8 +68,10 @@ public class Pakk {
 	*/
 	
 	//Meetod, mis võtab pealmise kaardi
-	public Kaart votaKaart1(){
-		if(pakk1.size()==0){
+	
+	
+	public Kaart votaKaart1() {
+		if(pakk1.size() == 0) {
 			throw new RuntimeException("Tühi pakk.");
 		}
 		Kaart tagastada=pakk1.get(0);
@@ -78,11 +80,11 @@ public class Pakk {
 	}
 	
 	//Meetod, mis võtab pealmise kaardi
-	public Kaart votaKaart2(){
-		if(pakk2.size()==0){
+	public Kaart votaKaart2() {
+		if(pakk2.size() == 0) {
 			throw new RuntimeException("Tühi pakk.");
 		}
-		Kaart tagastada=pakk2.get(0);
+		Kaart tagastada = pakk2.get(0);
 		pakk2.remove(0);
 		return tagastada;
 	}
@@ -91,8 +93,8 @@ public class Pakk {
 	public void poolita(){
 		ArrayList<Kaart> koopia1 = new ArrayList<>();
 		ArrayList<Kaart> koopia2 = new ArrayList<>();
-		for(int i=0; i<kaardid.size(); i++){
-			if(i<kaardid.size()/2){
+		for(int i = 0; i < kaardid.size(); i++){
+			if(i < kaardid.size() / 2){
 				koopia1.add(kaardid.get(i));
 			}
 			else{
@@ -103,9 +105,9 @@ public class Pakk {
 		this.pakk2 = koopia2;
 	}
 
-	public String valjastaKaardid(){
+	public String valjastaKaardid() {
 		String valjastada = "";
-		for(Kaart kaart: kaardid){
+		for(Kaart kaart: kaardid) {
 			valjastada += kaart + " ";
 		}
 		return valjastada;
@@ -119,9 +121,9 @@ public class Pakk {
 		return valjastada;
 	}
 	
-	public String valjastaPakk2(){
+	public String valjastaPakk2() {
 		String valjastada = "";
-		for(Kaart kaart: pakk2){
+		for(Kaart kaart: pakk2) {
 			valjastada += kaart + " ";
 		}
 		return valjastada;

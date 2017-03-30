@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class Kaart {
 
 		//System.out.println("Konstruktorisse 1 saadud kaardid: " + tugevusk + mastk);
 		
-		if(mastid.indexOf(mastk)==-1 || tugevused.indexOf(tugevusk)==-1 || tugevusk.equals("1") || tugevusk.equals("")){
+		if(mastid.indexOf(mastk) == -1 || tugevused.indexOf(tugevusk) == -1 || tugevusk.equals("1") || tugevusk.equals("")) {
 			throw new RuntimeException("Ebasobivad kaardid");
 		}
 		
@@ -34,12 +34,12 @@ public class Kaart {
 		String tugevusk;
 		char mastk;
 		
-		if(pikkus==2){
+		if(pikkus == 2) {
 			tugevusk = Character.toString(kombineeritud.charAt(0));
 			mastk = kombineeritud.charAt(1);
 		}
 		
-		else{ //pikkus==3
+		else { //pikkus==3
 			String esimene = Character.toString(kombineeritud.charAt(0));
 			String teine = Character.toString(kombineeritud.charAt(1));
 			tugevusk = esimene+teine;
@@ -48,7 +48,7 @@ public class Kaart {
 		
 		//System.out.println("Konstruktorisse 2 saadud kaardid: " + tugevusk + mastk);
 		
-		if(mastid.indexOf(mastk)==-1 || tugevused.indexOf(tugevusk)==-1 || tugevusk.equals("1") || tugevusk.equals("")){
+		if(mastid.indexOf(mastk) == -1 || tugevused.indexOf(tugevusk) == -1 || tugevusk.equals("1") || tugevusk.equals("")) {
 			throw new RuntimeException("Ebasobivad kaardid");
 		}
 		

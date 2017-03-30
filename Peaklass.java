@@ -55,8 +55,6 @@ public class Peaklass {
 				//Kui on veel mitme kaardi vahel valida
 				System.out.print((j + 1) + ". kaart: " + kaardidKoopia.get(j) + "\t");
 
-
-
 			}
 
 
@@ -113,15 +111,15 @@ public class Peaklass {
 	}
 
 	public static void kaartidePohjaLisamine(int kaartideVordlus, Kaart kaart1, Kaart kaart2, Pakk pakk, Scanner sisend, List<Kaart> voidetavadKaardid, List<Kaart> mangija1Kaardid, List<Kaart> mangija2Kaardid, String manguvorm) {
-		if(kaartideVordlus == 1){
+		if(kaartideVordlus == 1) {
 			//kaartideJarjekord(Arrays.asList(kaart1, kaart2), pakk, 1, sisend);
 			kaartideJarjekord(voidetavadKaardid, pakk, 1, sisend, manguvorm);
 		}
-		if(kaartideVordlus == 2){
+		if(kaartideVordlus == 2) {
 			//kaartideJarjekord(Arrays.asList(kaart1, kaart2), pakk, 2, sisend);
 			kaartideJarjekord(voidetavadKaardid, pakk, 2, sisend, manguvorm);
 		}
-		if(kaartideVordlus == 0){
+		if(kaartideVordlus == 0) {
 
 			//System.out.println("võrdsed");
 			//kaartideJarjekord(Arrays.asList(kaart1, kaart2), pakk, 0);
@@ -130,10 +128,10 @@ public class Peaklass {
 			kaardid1.add(kaart1);
 			kaardid2.add(kaart2);
 
-			if(pakk.pakk1.size() == 0){
+			if(pakk.pakk1.size() == 0) {
 				pakk.pakk1.add(kaardid1.remove(0));
 			}
-			if(pakk.pakk2.size() == 0){
+			if(pakk.pakk2.size() == 0) {
 				pakk.pakk2.add(kaardid2.remove(0));
 			}
 			Kaart tagurpidiKaart1 = pakk.votaKaart1();
@@ -187,13 +185,13 @@ public class Peaklass {
 			Kaart kaart2 = pakk.votaKaart2();
 			System.out.println();
 			System.out.print("Esimene mängija käis kaardi: " + kaart1 + " ning teine mängija: " + kaart2);
-			if(kaart1.getTugevusarv() > kaart2.getTugevusarv()){
+			if(kaart1.getTugevusarv() > kaart2.getTugevusarv()) {
 				System.out.println(", esimene mängija saab kaardid endale.");
 			}
-			if(kaart1.getTugevusarv() < kaart2.getTugevusarv()){
+			if(kaart1.getTugevusarv() < kaart2.getTugevusarv()) {
 				System.out.println(", teine mängija saab kaardid endale.");
 			}
-			if(kaart1.getTugevusarv() == kaart2.getTugevusarv()){
+			if(kaart1.getTugevusarv() == kaart2.getTugevusarv()) {
 				System.out.println(", kaardid osutusid tugevuselt võrdseteks!");
 			}
 
@@ -223,6 +221,7 @@ public class Peaklass {
 		while(!onKorrektne(manguvorm, 1, 2))
 			manguvorm = scan.nextLine();
 		
+		scan.close();
 		if(manguvorm.equals("1"))
 			System.out.println("Nüüdsest mängite arvuti vastu!");
 
