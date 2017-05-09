@@ -6,15 +6,17 @@ import java.util.Random;
 import java.util.Scanner;
 
 import javafx.application.Application;
-
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -47,7 +49,6 @@ public class Graafika extends Application {
 			return false;  
 		}  
 
-		//System.out.println(str + " min " +  min + " max " +  max);
 		if(Integer.parseInt(str) < min || Integer.parseInt(str) > max){
 
 			System.out.println();
@@ -63,8 +64,16 @@ public class Graafika extends Application {
 		return true;  
 	}
 
-	public static void kaartideJarjekord(List<Kaart> kaardid, Pakk pakk, int mangijaNr, Scanner sisend, String manguvorm) { //pakk - sinna lisatakse uued kaardid, mangijaNr - kumma mängija kaardid
+	public static void kaartideJarjekord(List<Kaart> kaardid, Pakk pakk, int mangijaNr, Scanner sisend, String manguvorm, 
+			Stage peaLava, BorderPane piir2) { //pakk - sinna lisatakse uued kaardid, mangijaNr - kumma mängija kaardid
 
+		Button nupp1 = new Button();
+		piir2.setLeft(nupp1);
+		Button nupp2 = new Button();
+		piir2.setRight(nupp2);
+
+
+	
 		List<Kaart> kaardidKoopia =  new ArrayList<>();
 		kaardidKoopia.addAll(kaardid);
 		for(int i = 0; i < kaardid.size(); i++) {
@@ -101,8 +110,12 @@ public class Graafika extends Application {
 				System.out.println();
 			}
 
-			else{
+			else{ //Kasutaja sisestamine
+				
+				
 				String indeksSonena = sisend.nextLine();
+
+
 				while(!onKorrektne(indeksSonena, 1, kaardidKoopia.size())){
 					indeksSonena = sisend.nextLine();
 				}
@@ -118,22 +131,27 @@ public class Graafika extends Application {
 				pakk.pakk2.add(kaardidKoopia.remove(indeksNumbrina - 1));
 			}
 
+			Scene mang = new Scene(piir2);
+			peaLava.setScene(mang);
+			peaLava.show();
+
 			System.out.println("Mängija 1 pakk peale kaardi lisamist: " + pakk.valjastaPakk1() + pakk.pakk1.size());
 			System.out.println("Mängija 2 pakk peale kaardi lisamist: " + pakk.valjastaPakk2() + pakk.pakk2.size());
 
-			//System.out.println(i);
 		}
 
 	}
 
-	public static void kaartidePohjaLisamine(int kaartideVordlus, Kaart kaart1, Kaart kaart2, Pakk pakk, Scanner sisend, List<Kaart> voidetavadKaardid, List<Kaart> mangija1Kaardid, List<Kaart> mangija2Kaardid, String manguvorm) {
+	public static void kaartidePohjaLisamine(int kaartideVordlus, Kaart kaart1, Kaart kaart2, Pakk pakk, 
+			Scanner sisend, List<Kaart> voidetavadKaardid, List<Kaart> mangija1Kaardid, 
+			List<Kaart> mangija2Kaardid, String manguvorm, Stage peaLava, BorderPane piir2) {
 		if(kaartideVordlus == 1) {
 			//kaartideJarjekord(Arrays.asList(kaart1, kaart2), pakk, 1, sisend);
-			kaartideJarjekord(voidetavadKaardid, pakk, 1, sisend, manguvorm);
+			kaartideJarjekord(voidetavadKaardid, pakk, 1, sisend, manguvorm, peaLava, piir2);
 		}
 		if(kaartideVordlus == 2) {
 			//kaartideJarjekord(Arrays.asList(kaart1, kaart2), pakk, 2, sisend);
-			kaartideJarjekord(voidetavadKaardid, pakk, 2, sisend, manguvorm);
+			kaartideJarjekord(voidetavadKaardid, pakk, 2, sisend, manguvorm, peaLava, piir2);
 		}
 		if(kaartideVordlus == 0) {
 
@@ -150,6 +168,7 @@ public class Graafika extends Application {
 			if(pakk.pakk2.size() == 0) {
 				pakk.pakk2.add(kaardid2.remove(0));
 			}
+
 			Kaart tagurpidiKaart1 = pakk.votaKaart1();
 			Kaart tagurpidiKaart2 = pakk.votaKaart2();
 			kaardid1.add(tagurpidiKaart1);
@@ -161,6 +180,7 @@ public class Graafika extends Application {
 			if(pakk.pakk2.size() == 0){
 				pakk.pakk2.add(kaardid2.remove(0));
 			}
+
 			Kaart uusKaart1 = pakk.votaKaart1();
 			Kaart uusKaart2 = pakk.votaKaart2();
 			kaardid1.add(uusKaart1);
@@ -170,7 +190,8 @@ public class Graafika extends Application {
 			kokkuKaardid.addAll(kaardid1);
 			kokkuKaardid.addAll(kaardid2);
 
-			kaartidePohjaLisamine(vordleKaarte(uusKaart1, uusKaart2), uusKaart1, uusKaart2, pakk, sisend, kokkuKaardid, kaardid1, kaardid2, manguvorm);
+			kaartidePohjaLisamine(vordleKaarte(uusKaart1, uusKaart2), uusKaart1, uusKaart2, pakk, sisend, kokkuKaardid, 
+					kaardid1, kaardid2, manguvorm, peaLava, piir2);
 		}
 	}
 
@@ -181,35 +202,17 @@ public class Graafika extends Application {
 		// teisele piiripaanile tuleb 2 nuppu, üks vasakule ja
 		// üks paremale
 		BorderPane piir2 = new BorderPane();
+		VBox kusimused = new VBox();
 		Label mangija1 = new Label();
-		piir2.setTop(mangija1);
 		Label mangija2 = new Label();
-		piir2.setTop(mangija2);
-		Button nupp1 = new Button("vasak");
+		Label kelle = new Label();
+		kusimused.getChildren().addAll(mangija1, mangija2, kelle);
+		piir2.setTop(kusimused);
+
+		Button nupp1 = new Button();
 		piir2.setLeft(nupp1);
-		Button nupp2 = new Button("parem");
+		Button nupp2 = new Button();
 		piir2.setRight(nupp2);
-		
-		
-
-		// klahvisündmuse lisamine esimele nupule
-		nupp1.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent keyEvent) {
-				if (keyEvent.getCode() == KeyCode.DIGIT1) {
-					//tekst.setText("nüüd 1");
-				}
-			}
-		});
-
-
-		// hiiresündmuse lisamine teisele nupule
-		nupp2.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent me) {
-				//tekst.setText("nüüd 2");
-			}
-		});
 
 		Scanner sisend = new Scanner(System.in);
 
@@ -220,14 +223,12 @@ public class Graafika extends Application {
 		pakk.poolita();
 		System.out.println("Mängija 1 esialgne pakk: " + pakk.valjastaPakk1() + pakk.pakk1.size());
 		mangija1.setText(pakk.valjastaPakk1() + pakk.pakk1.size());
-		
+
 		System.out.println("Mängija 2 esialgne pakk: " + pakk.valjastaPakk2() + pakk.pakk2.size());
 		mangija2.setText(pakk.valjastaPakk2() + pakk.pakk2.size());
-		
-		Scene mang = new Scene(piir2);
-		peaLava.setScene(mang);
-		peaLava.show();
-		
+
+
+
 		while(true){
 			if(pakk.pakk1.size()==0 || pakk.pakk2.size()==0) {
 				if(pakk.pakk1.size()==0)
@@ -241,32 +242,41 @@ public class Graafika extends Application {
 			Kaart kaart2 = pakk.votaKaart2();
 			System.out.println();
 			System.out.print("Esimene mängija käis kaardi: " + kaart1 + " ning teine mängija: " + kaart2); //VÄLJATRÜKK
+			nupp1.setText(kaart1.toString());
+			nupp2.setText(kaart2.toString());
+
+
 			if(kaart1.getTugevusarv() > kaart2.getTugevusarv()) {
 				System.out.println(", esimene mängija saab kaardid endale.");
+				kelle.setText("Esimene mängija saab kaardid endale.");
 			}
 			if(kaart1.getTugevusarv() < kaart2.getTugevusarv()) {
 				System.out.println(", teine mängija saab kaardid endale.");
+				kelle.setText("teine mängija saab kaardid endale.");
 			}
 			if(kaart1.getTugevusarv() == kaart2.getTugevusarv()) {
 				System.out.println(", kaardid osutusid tugevuselt võrdseteks!");
+				kelle.setText("kaardid osutusid tugevuselt võrdseteks!");
 			}
+
+			Scene mang = new Scene(piir2);
+			peaLava.setScene(mang);
+			peaLava.show();
 
 			System.out.println();
 
 			int kaartideVordlus = vordleKaarte(kaart1, kaart2);
 
-			kaartidePohjaLisamine(kaartideVordlus, kaart1, kaart2, pakk, sisend, Arrays.asList(kaart1, kaart2), Arrays.asList(kaart1), Arrays.asList(kaart2), manguvorm);
+			kaartidePohjaLisamine(kaartideVordlus, kaart1, kaart2, pakk, sisend, Arrays.asList(kaart1, kaart2), Arrays.asList(kaart1), Arrays.asList(kaart2), manguvorm, peaLava, piir2);
 
 			System.out.println();
 			System.out.println("Mängija 1 pakk peale kaardi lisamist: " + pakk.valjastaPakk1() + pakk.pakk1.size());
 			System.out.println("Mängija 2 pakk peale kaardi lisamist: " + pakk.valjastaPakk2() + pakk.pakk2.size());
 			System.out.println();
-			
-			
 
 		}
 		sisend.close();
-		
+
 	}
 
 	@Override
