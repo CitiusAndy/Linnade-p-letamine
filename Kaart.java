@@ -3,6 +3,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.scene.image.Image;
+
 //Klass kaart
 //Java harjutuste eeskujul
 
@@ -13,6 +15,7 @@ public class Kaart {
 	private char mast; // 4 masti
 	private static List<String> sobivadTugevused = Arrays.asList("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"); //List tugevustest, et neid hiljem arvuna saada
 	private String pildinimi;
+	private Image pilt;
 	
 	private static Map<Character, String> mastidenimetused = new HashMap<>();
 	
@@ -36,7 +39,7 @@ private static Map<String, String> tugevustenimetused = new HashMap<>();
 		tugevustenimetused.put("9", "9");
 		tugevustenimetused.put("10", "10");
 		tugevustenimetused.put("J", "jack");
-		tugevustenimetused.put("Q", "queens");
+		tugevustenimetused.put("Q", "queen");
 		tugevustenimetused.put("K", "king");
 		tugevustenimetused.put("A", "ace");
 	}
@@ -46,7 +49,6 @@ private static Map<String, String> tugevustenimetused = new HashMap<>();
 		String mastid = "♣♦♠♥";
 		String tugevused = "2345678910JQKA";
 		
-		//System.out.println("Konstruktorisse 1 saadud kaardid: " + tugevusk + mastk);
 		
 		if(mastid.indexOf(mastk) == -1 || tugevused.indexOf(tugevusk) == -1 || tugevusk.equals("1") || tugevusk.equals("")) {
 			throw new RuntimeException("Ebasobivad kaardid");
@@ -56,6 +58,7 @@ private static Map<String, String> tugevustenimetused = new HashMap<>();
 		this.mast = mastk;
 		this.tugevusarv = sobivadTugevused.lastIndexOf(tugevus);
 		this.pildinimi = tugevustenimetused.get(tugevusk) + "_of_" + mastidenimetused.get(mastk) + ".png";
+		pilt = new Image("file:" + pildinimi);
 	}
 	
 	public Kaart(String kombineeritud) {
@@ -77,7 +80,6 @@ private static Map<String, String> tugevustenimetused = new HashMap<>();
 			mastk = kombineeritud.charAt(2);
 		}
 		
-		//System.out.println("Konstruktorisse 2 saadud kaardid: " + tugevusk + mastk);
 		
 		if(mastid.indexOf(mastk) == -1 || tugevused.indexOf(tugevusk) == -1 || tugevusk.equals("1") || tugevusk.equals("")) {
 			throw new RuntimeException("Ebasobivad kaardid");
@@ -87,6 +89,7 @@ private static Map<String, String> tugevustenimetused = new HashMap<>();
 		this.mast = mastk;
 		this.tugevusarv = sobivadTugevused.lastIndexOf(tugevus);
 		this.pildinimi = tugevustenimetused.get(tugevusk) + "_of_" + mastidenimetused.get(mastk) + ".png";
+		pilt = new Image("file:" + pildinimi);
 
 	}
 	
@@ -98,8 +101,8 @@ private static Map<String, String> tugevustenimetused = new HashMap<>();
 		return tugevusarv;
 	}
 
-	public String getPildinimi() {
-		return pildinimi;
+	public Image getPilt() {
+		return pilt;
 	}
 
 	@Override

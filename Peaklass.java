@@ -51,13 +51,9 @@ public class Peaklass {
 			System.out.print("Valikusolevad kaardid: ");
 			for(int j = 0; j < kaardidKoopia.size(); j++) {
 
-
 				//Kui on veel mitme kaardi vahel valida
 				System.out.print((j + 1) + ". kaart: " + kaardidKoopia.get(j) + "\t");
-
 			}
-
-
 
 			if (i == kaardid.size() - 1) { // Kui järel on ainult üks kaart
 				System.out.println("\nViimasena lisan: " + kaardidKoopia.get(0));
@@ -105,7 +101,7 @@ public class Peaklass {
 			System.out.println("Mängija 1 pakk peale kaardi lisamist: " + pakk.valjastaPakk1() + pakk.pakk1.size());
 			System.out.println("Mängija 2 pakk peale kaardi lisamist: " + pakk.valjastaPakk2() + pakk.pakk2.size());
 
-			//			System.out.println(i);
+			//System.out.println(i);
 		}
 
 	}
@@ -160,7 +156,6 @@ public class Peaklass {
 
 
 	public static void mangi(String manguvorm) {
-
 
 		Scanner sisend = new Scanner(System.in);
 
